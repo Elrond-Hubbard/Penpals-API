@@ -16,6 +16,7 @@ const thoughtSchema = new Schema({
     type: String,
     required: true,
   },
+  reactions: [],
 });
 
 const Thought = model("Thought", thoughtSchema);
