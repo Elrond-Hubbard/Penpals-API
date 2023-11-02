@@ -21,10 +21,7 @@ router.get("/:id", (req, res) => {
 
 // Create one new user
 router.post("/", (req, res) => {
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-  })
+  User.create(req.body)
     .then((data) => res.json(data))
     .catch((err) => {
       if (err) throw err;
@@ -33,7 +30,15 @@ router.post("/", (req, res) => {
 
 // Update one user by id
 router.put("/:id", (req, res) => {
-// TODO: findOneAndUpdate
+  User.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body },
+    { new: true }
+  )
+    .then((data) => res.json(data))
+    .catch((err) => {
+      if (err) throw err;
+    });
 });
 
 // Delete one user by id
