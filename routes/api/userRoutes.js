@@ -54,6 +54,19 @@ router.post("/:userId/friends/:friendId", (req, res) => {
     });
 });
 
+// Delete one friend by id
+router.delete("/:userId/friends/:friendId", (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $pull: { friends: req.params.friendId } },
+    { new: true }
+  )
+    .then((data) => res.json(data))
+    .catch((err) => {
+      if (err) throw err;
+    });
+});
+
 // Delete one user by id
 router.delete("/:id", (req, res) => {
   User.deleteOne({ _id: req.params.id })
