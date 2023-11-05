@@ -14,14 +14,15 @@ const userSchema = new Schema(
       unique: true,
       required: true,
     },
-    thoughts: [],
-    friends: [],
+    thoughts: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
+    friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
   },
   {
     toJSON: {
       virtuals: true,
     },
     id: false,
+    versionKey: false,
   }
 );
 

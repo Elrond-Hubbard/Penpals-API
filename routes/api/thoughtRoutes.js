@@ -7,7 +7,8 @@ router.get("/", (req, res) => {
   Thought.find({})
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -16,7 +17,8 @@ router.get("/:id", (req, res) => {
   Thought.find({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -27,12 +29,12 @@ router.post("/", (req, res) => {
       User.findOneAndUpdate(
         { username: data.username },
         { $addToSet: { thoughts: data._id } },
-        {new: true}
-      )
-      .then((data) => res.json(data))
+        { new: true }
+      ).then((data) => res.json(data));
     })
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -45,7 +47,8 @@ router.put("/:id", (req, res) => {
   )
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -54,7 +57,8 @@ router.delete("/:id", (req, res) => {
   Thought.findOneAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 

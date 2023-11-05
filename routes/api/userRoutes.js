@@ -1,12 +1,16 @@
 const router = require("express").Router();
 const User = require("../../models/User");
+const Thought = require("../../models/Thought");
 
 // Find all users
 router.get("/", (req, res) => {
   User.find({})
+    .populate("friends")
+    .populate("thoughts")
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -15,7 +19,8 @@ router.get("/:id", (req, res) => {
   User.find({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -24,7 +29,8 @@ router.post("/", (req, res) => {
   User.create(req.body)
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -37,7 +43,8 @@ router.put("/:id", (req, res) => {
   )
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -50,7 +57,8 @@ router.post("/:userId/friends/:friendId", (req, res) => {
   )
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
@@ -63,16 +71,22 @@ router.delete("/:userId/friends/:friendId", (req, res) => {
   )
     .then((data) => res.json(data))
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
-// Delete one user by id
+// Delete one user by id and delete user's thoughts
 router.delete("/:id", (req, res) => {
   User.findOneAndDelete({ _id: req.params.id })
-    .then((data) => res.json(data))
+    .then((data) => {
+      Thought.deleteMany({ username: data.username }).then((data) =>
+        res.json(data)
+      );
+    })
     .catch((err) => {
-      if (err) throw err;
+      console.log(err);
+      res.json(err);
     });
 });
 
