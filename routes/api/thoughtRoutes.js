@@ -70,7 +70,7 @@ router.post("/:thoughtId/reactions", (req, res) => {
 router.delete("/:thoughtId/reactions/:reactionId", (req, res) => {
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-    { $pull: { reactions: req.params.reactionId } },
+    { $pull: { reactions: { _id: req.params.reactionId } } },
     { new: true }
   )
     .then((data) => res.json(data))
