@@ -69,7 +69,7 @@ router.delete("/:userId/friends/:friendId", (req, res) => {
 
 // Delete one user by id
 router.delete("/:id", (req, res) => {
-  User.deleteOne({ _id: req.params.id })
+  User.findOneAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => {
       if (err) throw err;

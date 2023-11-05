@@ -51,7 +51,7 @@ router.put("/:id", (req, res) => {
 
 // Delete one thought by id
 router.delete("/:id", (req, res) => {
-  Thought.deleteOne({ _id: req.params.id })
+  Thought.findOneAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => {
       if (err) throw err;
