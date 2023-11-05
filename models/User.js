@@ -13,6 +13,7 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
+      match: [/.+@.+\..+/, "email address invalid"]
     },
     thoughts: [{type: Schema.Types.ObjectId, ref: 'Thought'}],
     friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
