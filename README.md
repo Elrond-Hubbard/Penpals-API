@@ -1,6 +1,8 @@
 # Penpals API
   ![github-license](https://img.shields.io/badge/License-MIT-blue.svg)
 
+  [![DEMO VIDEO](https://img.youtube.com/vi/lgzUXRSjTq4/0.jpg)](https://www.youtube.com/watch?v=lgzUXRSjTq4)
+
   ## Description
   Penpals API is tailored for use in social media platforms, forums, and discussion boards, where many users may want to share their thoughts and/or react to other users' thoughts. The API is powered by Mongoose and Express, and provides a straightforward backend solution for a variety of applications.
 
